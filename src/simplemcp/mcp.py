@@ -18,13 +18,3 @@ class MCPResponse(JsonRpcResponse):
 
 class MCPNotification(MCPRequest):
     id: UnsetType = Field(default=UNSET)
-
-
-noti = MCPNotification(method="example.notify", params={"key": "value"})
-
-try:
-    noti = MCPNotification(
-        method="example.notify", params={"key": "value"}, jsonrpc="1.0"
-    )
-except Exception as e:
-    print(f"Error creating MCPNotification with id: {e}")
