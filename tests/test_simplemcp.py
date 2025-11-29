@@ -30,7 +30,7 @@ def test_notification_enforces_no_id():
 
 
 def test_response_accepts_result_and_flags_non_error():
-    response = MCPResponse(jsonrpc="2.0", result={"pong": True}, id=1)
+    response = MCPResponse(result={"pong": True}, id=1)
 
     assert response.is_error() is False
     assert response.error is UNSET
