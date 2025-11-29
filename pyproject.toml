@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simplemcp"
+version = "0.0.1"
+description = "Minimal Client and Server for MCP over stdio"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "SimpleMCP"}]
+dependencies = [
+    "fastjson_rpc2>=1.0,<2.0"
+]
+
+[project.urls]
+Homepage = "https://https://github.com/cbisaccia78/FastJSON-RPC"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

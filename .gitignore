@@ -1,0 +1,38 @@
+.venv
+venv
+# Bytecode / cache
+__pycache__/
+*.py[cod]
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+pip-wheel-metadata/
+
+# Coverage / test / tooling caches
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Logs
+*.log
+
+# Virtual env variants
+.env/
+.envrc
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Misc
+*.bak
+*.tmp
+# OS
+.DS_Store
