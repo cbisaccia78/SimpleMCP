@@ -15,6 +15,13 @@ def test_response_enforces_jsonrpc_version():
         response = MCPResponse(jsonrpc="1.0", result={"pong": True}, id=1)
 
 
+def test_notification_enforces_jsonrpc_version():
+    with pytest.raises(ValidationError):
+        notification = MCPNotification(
+            jsonrpc="1.0", method="ping", params={"foo": "bar"}
+        )
+
+
 def test_response_not_both_error_and_result():
     with pytest.raises(ValidationError):
         response = MCPResponse(
