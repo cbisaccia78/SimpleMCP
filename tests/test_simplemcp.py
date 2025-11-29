@@ -60,3 +60,55 @@ def test_response_rejects_both_result_and_error():
             error={"code": -32000, "message": "Custom"},
             id=1,
         )
+
+
+def test_response_metadata():
+    response = MCPResponse(
+        result={"data": 42, "_meta": {"info": "test"}},
+        id=1,
+    )
+
+    assert response.has_metadata() is True
+    assert response.metadata == {"info": "test"}
+
+    response = MCPResponse(
+        result={"data": 42},
+        id=1,
+    )
+
+    assert response.has_metadata() is False
+    assert response.metadata is UNSET
+
+
+def test_request_metadata():
+    request = MCPRequest(
+        method="do_something",
+        id=1,
+        params={"param1": "value1", "_meta": {"info": "test"}},
+    )
+
+    assert request.has_metadata() is True
+
+    request = MCPRequest(
+        method="do_something",
+        id=1,
+        params={"param1": "value1"},
+    )
+
+    assert request.has_metadata() is False
+
+
+def test_notification_metadata():
+    notification = MCPNotification(
+        method="notify_event",
+        params={"event": "started", "_meta": {"info": "test"}},
+    )
+
+    assert notification.has_metadata() is True
+
+    notification = MCPNotification(
+        method="notify_event",
+        params={"event": "started"},
+    )
+
+    assert notification.has_metadata() is False
