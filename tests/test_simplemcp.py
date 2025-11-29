@@ -38,7 +38,7 @@ def test_response_accepts_result_and_flags_non_error():
 
 def test_response_accepts_error_and_flags_error():
     response = MCPResponse(
-        error=ErrorObject(code=-32601, message="Method not found"),
+        error={"code": -32601, "message": "Method not found"},
         id=1,
     )
 
@@ -49,7 +49,7 @@ def test_response_accepts_error_and_flags_error():
 def test_response_rejects_both_result_and_error():
     with pytest.raises(ValidationError):
         MCPResponse(
-            result="nope",
-            error=ErrorObject(code=-32000, message="Custom"),
+            result={"nope": True},
+            error={"code": -32000, "message": "Custom"},
             id=1,
         )
