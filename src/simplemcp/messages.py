@@ -3,10 +3,10 @@ from typing import Literal, Any
 from fastjson_rpc2 import JsonRpcRequest, JsonRpcResponse, UNSET, UnsetType
 from pydantic import Field
 
-LATEST_PROTOCOL_VERSION = "2025-06-18"
+from .helpers import UTF8EncodingMixin
 
 
-class MCPRequest(JsonRpcRequest):
+class MCPRequest(JsonRpcRequest, UTF8EncodingMixin):
     jsonrpc: Literal["2.0"] = "2.0"
     id: str | int
     params: dict[str, Any] = None
@@ -25,7 +25,7 @@ class MCPRequest(JsonRpcRequest):
         return UNSET
 
 
-class MCPResponse(JsonRpcResponse):
+class MCPResponse(JsonRpcResponse, UTF8EncodingMixin):
     jsonrpc: Literal["2.0"] = "2.0"
     id: str | int
     result: dict[str, Any] = Field(default=UNSET)
@@ -44,5 +44,5 @@ class MCPResponse(JsonRpcResponse):
         return UNSET
 
 
-class MCPNotification(MCPRequest):
+class MCPNotification(MCPRequest, UTF8EncodingMixin):
     id: UnsetType = Field(default=UNSET)
