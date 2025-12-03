@@ -6,7 +6,7 @@ from threading import Thread, Lock
 from concurrent.futures import Future
 from enum import Enum
 
-from .messages import MCPRequest
+from .messages import MCPRequest, MCPResponse
 from .constants import LATEST_PROTOCOL_VERSION
 from .helpers import UTF8EncodingMixin
 
@@ -22,7 +22,7 @@ class ClientState(Enum):
 class PendingRequests:
     def __init__(self):
         self._lock = Lock()
-        self._pending: dict[int | str, Future[MCPRequest]] = {}
+        self._pending: dict[int | str, Future[MCPResponse]] = {}
 
     def register(self, msg_id, future):
         with self._lock:
@@ -87,7 +87,7 @@ class Client:
 
     def send_mcp_message(
         self, message_id: int, message: UTF8EncodingMixin
-    ) -> Future[MCPRequest]:
+    ) -> Future[MCPResponse]:
         if self.server_process.stdin:
             debug(f"Sending message to server: {message}")
             self.server_process.stdin.write(message.encode_utf8())
